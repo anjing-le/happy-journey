@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-`npm run build` 会检查 TypeScript、打包资源，并把 React 首页预渲染为 HTML。产物在 `dist/`。`npm run preview` 可在本地检查构建结果。
+`npm run build` 会检查 TypeScript、打包样式，并把 React 组件预渲染为 HTML。当前页面无需客户端 JavaScript；产物在 `dist/`。`npm run preview` 可在本地检查构建结果。
 
 ## 添加方向和记录
 
