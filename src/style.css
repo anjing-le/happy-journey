@@ -16,25 +16,8 @@ a { color: inherit; text-decoration: none; }
 a, a * { cursor: var(--cursor-pointer); }
 a:focus-visible { outline: 2px solid #d4919a; outline-offset: 3px; }
 
-.app-shell { height: 100svh; min-height: 680px; display: flex; flex-direction: column; background: #fcf7f6; }
-.window-bar { height: 54px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 27px; border-bottom: 1px solid #f1e8e8; color: #b5a1a7; font-size: 11px; letter-spacing: .08em; }
-.window-mark { font-weight: 650; letter-spacing: .03em; }
-.window-note { font-size: 10px; letter-spacing: .18em; }
-.app-body { display: flex; min-height: 0; flex: 1; }
-.side-rail { width: 70px; flex: none; display: flex; flex-direction: column; align-items: center; border-right: 1px solid #f1e8e8; color: #b7aeb2; }
-.rail-item { width: 38px; height: 40px; display: grid; place-items: center; color: #aaa4a9; }
-.rail-item svg { width: 21px; height: 21px; }
-.rail-chevron { margin-top: 13px; }
-.rail-group { display: flex; flex-direction: column; gap: 14px; margin-top: 29px; }
-.rail-group .rail-item:nth-child(1) { color: #f2a245; }
-.rail-group .rail-item:nth-child(2) { color: #9d99e6; }
-.rail-group .rail-item:nth-child(3) { color: #dc9eab; }
-.rail-group .rail-item:nth-child(4) { color: #76b8d9; }
-.rail-home { margin-top: auto; margin-bottom: 14px; color: #dc9eab; }
-
-.tracks-page { min-width: 0; flex: 1; display: flex; flex-direction: column; padding: 22px clamp(22px, 3vw, 46px) 25px; }
-h1 { flex: none; margin: 0 4px 19px; align-self: flex-end; color: var(--muted); font-size: clamp(15px, 1.15vw, 20px); font-weight: 350; letter-spacing: .16em; line-height: 1.4; }
-.tracks-grid { min-height: 0; flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); grid-template-rows: repeat(4, minmax(0,1fr)); gap: 12px; }
+.tracks-page { min-width: 0; height: 100svh; min-height: 680px; display: flex; padding: clamp(16px, 2vw, 32px); background: #fcf7f6; }
+.tracks-grid { min-width: 0; min-height: 0; flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); grid-template-rows: repeat(4, minmax(0,1fr)); gap: 12px; }
 .track-card { min-width: 0; min-height: 0; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 0; border-radius: 19px; text-align: center; background: linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,.42)); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 1px 3px rgba(0,0,0,.025); transition: transform .25s cubic-bezier(.4,0,.2,1), box-shadow .25s cubic-bezier(.4,0,.2,1); }
 .track-card--link { cursor: var(--cursor-pointer); }
 .track-card--static, .track-card--static * { cursor: var(--cursor-default); }
@@ -48,22 +31,17 @@ h1 { flex: none; margin: 0 4px 19px; align-self: flex-end; color: var(--muted); 
 .track-card__desc { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: clamp(11px, 1vw, 15px); }
 
 @media (max-width: 800px) {
-  .app-shell { height: auto; min-height: 100svh; }
-  .side-rail { width: 48px; }
-  .rail-item { width: 32px; }
-  .rail-item svg { width: 17px; height: 17px; }
-  .tracks-page { padding: 23px 18px 28px; }
+  .tracks-page { height: auto; min-height: 100svh; padding: 18px; }
   .tracks-grid { grid-template-columns: repeat(2, minmax(0,1fr)); grid-template-rows: none; grid-auto-rows: minmax(170px, auto); }
   .track-card__art { width: min(46%, 86px); transform: translateY(-17px); }
   .track-card__info { max-height: 70px; opacity: 1; transform: none; margin-top: 100px; }
-  h1 { font-size: 14px; }
+  .track-card:hover .track-card__art, .track-card:focus-visible .track-card__art { opacity: .82; transform: translateY(-17px); }
+  .track-card:hover .track-card__info, .track-card:focus-visible .track-card__info { transform: none; }
+  .track-card__name { font-size: clamp(15px, 2vw, 18px); }
+  .track-card__desc { font-size: 11px; }
 }
 @media (max-width: 480px) {
-  .window-bar { height: 48px; padding: 0 15px; }
-  .window-note { display: none; }
-  .side-rail { display: none; }
-  .tracks-page { padding: 18px 12px 25px; }
-  h1 { margin-bottom: 16px; font-size: 12px; }
+  .tracks-page { padding: 12px; }
   .tracks-grid { gap: 9px; grid-auto-rows: minmax(150px, auto); }
   .track-card { border-radius: 15px; }
   .track-card__art { width: min(46%, 86px); }
