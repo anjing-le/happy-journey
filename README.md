@@ -23,4 +23,6 @@ npm run dev
 
 ## 发布
 
-推送到 `main` 后，GitHub Actions 构建并发布 GitHub Pages。项目路径为 `/happy-journey/`。
+默认构建使用根路径，供 Cloudflare Pages 和 `happy-journey.anjing.cc` 使用。Cloudflare Pages 的构建命令为 `npm run build`，输出目录为 `dist`。
+
+现有 GitHub Pages 工作流会设置 `BASE_PATH=/happy-journey/`，推送到 `main` 后发布至 `/happy-journey/`。
