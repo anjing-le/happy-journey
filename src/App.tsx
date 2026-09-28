@@ -1,67 +1,51 @@
-import { directions } from './content';
+import type { CSSProperties } from 'react';
+import { tracks, type Track } from './content';
+
+const base = process.env.BASE_PATH || '/';
+
+function RailIcon({ name }: { name: string }) {
+  const paths: Record<string, React.ReactNode> = {
+    chevron: <path d="m9 5 7 7-7 7" />,
+    target: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1" /></>,
+    calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M7 3v4m10-4v4M3 10h18" /></>,
+    heart: <path d="M20.8 8.3c0 4.6-8.8 10.8-8.8 10.8S3.2 12.9 3.2 8.3a4.5 4.5 0 0 1 8.8-1.2 4.5 4.5 0 0 1 8.8 1.2Z" />,
+    list: <><path d="m4 6 1.5 1.5L8 5m3 2h9M4 15l1.5 1.5L8 14m3 2h9" /></>,
+    settings: <><circle cx="12" cy="12" r="3" /><path d="M10 2h4l.6 2.3 1.7.7 2.1-1.2 2.8 2.8L20 8.7l.7 1.7L23 11v4l-2.3.6-.7 1.7 1.2 2.1-2.8 2.8-2.1-1.2-1.7.7L14 23h-4l-.6-2.3-1.7-.7-2.1 1.2-2.8-2.8L4 16.3l-.7-1.7L1 14v-4l2.3-.6L4 7.7 2.8 5.6l2.8-2.8L7.7 4l1.7-.7L10 2Z" /></>,
+    home: <><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" /><path d="M9 21v-8h6v8" /></>,
+  };
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
+}
+
+function TrackCard({ track, index }: { track: Track; index: number }) {
+  const style = { '--card-accent': track.accent } as CSSProperties;
+  const content = <>
+    <img className="track-card__art" src={`${base}assets/tracks/${track.id}.webp`} alt="" width="480" height="480" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
+    <span className="track-card__info"><span className="track-card__name">{track.name}</span><span className="track-card__desc">{track.description}</span></span>
+  </>;
+  return track.href
+    ? <a className="track-card track-card--link" href={`${base}${track.href}`} style={style} aria-label={`${track.name}：${track.description}`}>{content}</a>
+    : <div className="track-card track-card--static" style={style} role="img" aria-label={`${track.name}：${track.description}，暂未开放`}>{content}</div>;
+}
 
 export default function App() {
-  return (
-    <>
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Happy Journey，回到首页">
-          <span className="wordmark-dot" aria-hidden="true" />
-          happy journey
-        </a>
-        <nav aria-label="页面导航">
-          <a href="#directions">探索方向</a>
-          <a href="https://github.com/anjing-le/happy-journey" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-        </nav>
-      </header>
-
-      <main id="top">
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
-          <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
-          <div className="hero-content">
-            <span className="eyebrow"><span className="eyebrow-dot" /> A LIFE IN PROGRESS</span>
-            <h1 id="hero-title">把人生，<br /><span className="gradient-text">慢慢写成一段旅程。</span></h1>
-            <p className="hero-description">知识、经历，以及以后想珍藏的每个方向。<br className="desktop-break" />这里是一个会随着生活继续生长的地方。</p>
-            <a className="hero-action" href="#directions">从这里开始 <span aria-hidden="true">↘</span></a>
-          </div>
-          <div className="hero-scroll" aria-hidden="true"><span /> 向下看看</div>
-        </section>
-
-        <section className="directions-section" id="directions" aria-labelledby="directions-title">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">THE JOURNEY</span>
-              <h2 id="directions-title">旅程的方向</h2>
-            </div>
-            <p>从已有的两条线索开始，未来还会有更多。</p>
-          </div>
-          <div className="direction-grid">
-            {directions.map((direction, index) => (
-              <a className="direction-card" href={`#${direction.id}`} key={direction.id} style={{ '--card-accent': direction.color } as React.CSSProperties}>
-                <span className="direction-index">0{index + 1} / {direction.english}</span>
-                <span className="direction-main"><strong>{direction.name}</strong><span className="direction-arrow" aria-hidden="true">↗</span></span>
-                <span className="direction-description">{direction.description}</span>
-                <span className="direction-edge" aria-hidden="true" />
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="entries-section" aria-label="各方向的记录">
-          {directions.map((direction) => (
-            <div className="entry-row" id={direction.id} key={direction.id}>
-              <div className="entry-heading"><span className="entry-dot" style={{ background: direction.color }} /><h3>{direction.name}</h3></div>
-              {direction.entries.length ? (
-                <ul className="entry-list">{direction.entries.map((entry) => (
-                  <li key={entry.href}><a href={entry.href}><span>{entry.date}</span><strong>{entry.title}</strong><span>{entry.description}</span><span aria-hidden="true">↗</span></a></li>
-                ))}</ul>
-              ) : <p className="entry-empty">这一页还在等待第一篇记录。</p>}
-            </div>
-          ))}
-        </section>
+  return <div className="app-shell">
+    <div className="window-bar" aria-hidden="true"><span className="window-mark">happy journey</span><span className="window-note">ANJING · TRACKS</span></div>
+    <div className="app-body">
+      <aside className="side-rail" aria-hidden="true">
+        <span className="rail-item rail-chevron"><RailIcon name="chevron" /></span>
+        <span className="rail-group">
+          <span className="rail-item"><RailIcon name="target" /></span>
+          <span className="rail-item"><RailIcon name="calendar" /></span>
+          <span className="rail-item"><RailIcon name="heart" /></span>
+          <span className="rail-item"><RailIcon name="list" /></span>
+          <span className="rail-item"><RailIcon name="settings" /></span>
+        </span>
+        <span className="rail-item rail-home"><RailIcon name="home" /></span>
+      </aside>
+      <main className="tracks-page" aria-labelledby="page-title">
+        <h1 id="page-title">持续进化，安静生长</h1>
+        <div className="tracks-grid">{tracks.map((track, index) => <TrackCard key={track.id} track={track} index={index} />)}</div>
       </main>
-
-      <footer className="site-footer"><span>Happy Journey</span><span>记录还在继续 · <a href="#top">回到顶部 ↑</a></span></footer>
-    </>
-  );
+    </div>
+  </div>;
 }
