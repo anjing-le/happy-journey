@@ -23,6 +23,6 @@ npm run dev
 
 ## 发布
 
-默认构建使用根路径，供 Cloudflare Pages 和 `happy-journey.anjing.cc` 使用。Cloudflare Pages 的构建命令为 `npm run build`，输出目录为 `dist`。
+默认构建使用根路径，供 Cloudflare Pages 和 `happy-journey.anjing.cc` 使用。Cloudflare Pages 的构建命令为 `npm run build`，输出目录为 `dist`。推送 `main` 时，GitHub Actions 使用仓库密钥 `CF_PAGES_DEPLOY_HOOK` 触发 Cloudflare 从 GitHub 当前提交构建。
 
 现有 GitHub Pages 工作流会设置 `BASE_PATH=/happy-journey/`，推送到 `main` 后发布至 `/happy-journey/`。
