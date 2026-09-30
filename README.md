@@ -17,6 +17,12 @@ npm run dev
 
 在 `src/content.ts` 的 `tracks` 中维护名称、描述和链接。名称、描述来自本地 `anjing-anjing/src/config/modules.ts`。只有设置 `href` 的卡片可点击。三个空白页由 `scripts/prerender.mjs` 生成。
 
+## 内容整理 Skill
+
+[安静の四次元ポケット](.agents/skills/anjing-pocket/SKILL.md) 用于收下文字、图片、链接和音视频材料，保留原件与来源，按相关人生赛道逐步整理与打磨。可以用 `$anjing-pocket` 调用；仅讨论方案时不保存内容。
+
+各赛道的展示与整理习惯仍在逐个打磨。当前的明确收集请求默认写入本地 `.pocket/`，该目录不进入 Git 或网站构建；网站发布按实际请求处理。手机接收入口和持续自动化尚未实现。
+
 ## 样式来源
 
 配色和自定义鼠标素材参考 [anjing-le/anjing](https://github.com/anjing-le/anjing)；网格、悬停过渡和文案参考本地 `anjing-anjing` 的 TracksGrid。12 张插图以 Anjing 角色原图为参照生成并压缩为 WebP。
