@@ -37,6 +37,7 @@
 - 默认根路径用于 Cloudflare；`BASE_PATH=/happy-journey/` 用于 GitHub Pages。写静态资源链接时遵循项目现有 base 处理。
 - `public/`、`dist/` 和公开 Git 仓库不能用作私人材料收集箱。`.pocket/` 应在根 `.gitignore` 中排除，并位于 `public/` 之外。
 - 读取实际发布工作流后再发布；不能仅凭本地构建成功就声称域名已更新。
+- 提交和推送遵守根 `AGENTS.md`：作者与提交者均使用 `anjing-le` 及其 GitHub noreply 邮箱，提交前检查实际 Git 身份，推送使用对应账号的 SSH 身份。
 
 ## 旧方式可作为参考
 
